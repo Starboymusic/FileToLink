@@ -39,6 +39,7 @@
     - [Deploy to Koyeb](#deploy-to-koyeb)
     - [Deploy to Render](#deploy-to-render)
     - [Deploy to Railway](#deploy-to-railway)
+    - [Deploy to Heroku](#deploy-to-heroku)
   - [Reverse Proxy Setup](#reverse-proxy-setup)
 - [Support & Community](#support--community)
   - [Troubleshooting & FAQ](#troubleshooting--faq)
@@ -54,11 +55,11 @@
 
 ### 💡 Perfect For
 
--   🚀 Bypassing Telegram's built-in download speed limits
--   ☁️ Unlimited cloud storage with fast streaming and download links
--   🎬 Content creators sharing media files
--   👥 Communities distributing resources
--   🎓 Educational platforms sharing materials
+- 🚀 Bypassing Telegram's built-in download speed limits
+- ☁️ Unlimited cloud storage with fast streaming and download links
+- 🎬 Content creators sharing media files
+- 👥 Communities distributing resources
+- 🎓 Educational platforms sharing materials
 
 ## How It Works
 
@@ -66,15 +67,16 @@
 User Uploads File → Telegram Bot → Forwards to Channel → Generates Direct Link → Direct Download / Streaming
 ```
 
-1.  **Upload** → User sends any file to the bot.
-2.  **Store** → The bot forwards the file to your private storage channel (`BIN_CHANNEL`), where it is permanently saved to generate the link.
-3.  **Generate** → A unique, permanent link is created.
-4.  **Stream/Download** → Anyone with the link can stream or download the file directly in their browser.
-5.  **Balance** → Multi-client support distributes the load for high availability.
+1. **Upload** → User sends any file to the bot.
+2. **Store** → The bot forwards the file to your private storage channel (`BIN_CHANNEL`), where it is permanently saved to generate the link.
+3. **Generate** → A unique, permanent link is created.
+4. **Stream/Download** → Anyone with the link can stream or download the file directly in their browser.
+5. **Balance** → Multi-client support distributes the load for high availability.
 
 ## Features
 
 #### Core Functionality
+
 - ✅ **Direct Link Generation** - Convert any Telegram file into a direct HTTP(S) link.
 - ✅ **Permanent Links** - Links remain active as long as the file exists in the storage channel.
 - ✅ **Browser Streaming & Downloading** - Stream media directly or download files at high speed without a Telegram client.
@@ -82,22 +84,24 @@ User Uploads File → Telegram Bot → Forwards to Channel → Generates Direct 
 - ✅ **Batch Processing** - Generate links for multiple files at once with a single command.
 
 #### Performance & Scalability
+
 - ✅ **Multi-Client Support** - Distributes traffic across multiple Telegram bots to avoid limits and increase throughput.
 - ✅ **Async Architecture** - Built with `aiohttp` and `asyncio` for non-blocking, high-performance operations.
 - ✅ **MongoDB Integration** - Ensures persistent and reliable data storage.
 
 #### Security & Control
+
 - 🔐 **Token Authentication** - Secure user access with a time-limited token system.
 - 🛡️ **Admin Controls** - Full suite of commands for user and bot management.
 - 👤 **User Authentication** - Require users to join a specific channel before they can use the bot.
 - ✅ **Channel/Group Support** - Fully functional in private chats, groups, and channels.
 
 #### Customization
+
 - 🌍 **Custom Domain** - Serve files from your own domain for a professional look.
 - 🔗 **URL Shortening** - Integrate with URL shortener services for clean, shareable links.
 - 🎨 **Custom Templates** - Personalize messages sent by the bot to match your brand.
 - 📈 **Media Info Display** - Shows file size, duration, and format details in the response message.
-
 
 ## Configuration
 
@@ -155,11 +159,11 @@ Copy `config_sample.env` to `config.env` and fill in your values.
 
 ### Basic Usage
 
-1.  **Start** → Send `/start` to the bot.
-2.  **Authenticate** → Join required channels (if configured).
-3.  **Upload** → Send any media file.
-4.  **Receive** → Get a direct streaming and download link.
-5.  **Share** → Anyone can access the file via the link.
+1. **Start** → Send `/start` to the bot.
+2. **Authenticate** → Join required channels (if configured).
+3. **Upload** → Send any media file.
+4. **Receive** → Get a direct streaming and download link.
+5. **Share** → Anyone can access the file via the link.
 
 ### Commands Reference
 
@@ -225,10 +229,10 @@ speedtest - [Admin] Run network speed test
 
 Enable controlled access with tokens:
 
-1.  Set `TOKEN_ENABLED=True` in your `config.env`.
-2.  Users receive automatic tokens on first use.
-3.  Admins can grant permanent authorization with `/authorize` to bypass tokens.
-4.  Tokens include activation links for secure access.
+1. Set `TOKEN_ENABLED=True` in your `config.env`.
+2. Users receive automatic tokens on first use.
+3. Admins can grant permanent authorization with `/authorize` to bypass tokens.
+4. Tokens include activation links for secure access.
 
 ### URL Shortening
 
@@ -242,19 +246,23 @@ URL_SHORTENER_SITE=shortener.example.com
 ```
 
 ### Rate Limiting System
+
 Thunder implements a sophisticated multi-tier rate limiting system designed for high-performance file sharing:
 
 #### **Priority Queue Architecture**
+
 - **Owner Priority**: Complete bypass of all rate limits.
 - **Authorized Users**: Dedicated priority queue with faster processing.
 - **Regular Users**: Standard queue with fair scheduling.
 
 #### **Multi-Level Rate Limiting**
+
 - **Per-User Limits**: Configurable files per time window.
 - **Global Limits**: System-wide request throttling.
 - **Sliding Window**: Time-based rate limiting with automatic cleanup.
 
 #### **Smart Queue Management**
+
 - **Automatic Re-queuing**: Failed requests due to rate limits are intelligently re-queued.
 - **Queue Size Limits**: Configurable maximum queue size.
 - **Flood Protection**: Built-in protection against Telegram flood waits.
@@ -335,7 +343,6 @@ python -m Thunder
 
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=docker&image=docker.io/fyaz05/thunder:latest&name=thunder&ports=8080;http;/&env[API_ID]=&env[API_HASH]=&env[BOT_TOKEN]=&env[BIN_CHANNEL]=&env[OWNER_ID]=&env[DATABASE_URL]=&env[FQDN]=)
 
-
 After deployment, to add any additional environment variables, use the Koyeb dashboard under **Settings** → **Environment Variables**.
 
 ### Deploy to Render
@@ -352,6 +359,38 @@ After deployment, to add any additional environment variables, use the Koyeb das
 3. Add your environment variables
 4. Click **Deploy**
 
+### Deploy to Heroku
+
+1. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and login.
+2. Create an app in the EU region (required for GDPR compliance):
+   ```bash
+   heroku create your-app-name --region eu
+   heroku stack:set container
+   ```
+3. Set your config vars:
+   ```bash
+   heroku config:set API_ID="your_id" API_HASH="your_hash" BOT_TOKEN="your_token" \
+     BIN_CHANNEL="-100xxx" OWNER_ID="your_id" FQDN="your-app-name.herokuapp.com" \
+     HAS_SSL="True" NO_PORT="True" PORT="8080"
+   ```
+4. Set `DATABASE_URL` via the Heroku Dashboard or API (ampersand in MongoDB URL causes shell issues).
+5. Deploy via source upload (Heroku does not support direct git push with API key auth):
+   ```bash
+   # Create source tarball
+   tar -czf source.tar.gz --exclude='.git' --exclude='__pycache__' .
+   # Upload via Heroku Builds API — see devcenter.heroku.com/articles/build-and-release-using-the-api
+   ```
+6. Scale the dyno:
+   ```bash
+   heroku ps:scale web=1
+   ```
+7. Set `UPSTREAM_REPO` for auto-updates on dyno restart:
+   ```bash
+   heroku config:set UPSTREAM_REPO="https://github.com/fyaz05/FileToLink" UPSTREAM_BRANCH="main"
+   ```
+
+> **Note:** Heroku provides HTTPS automatically. Set `FQDN` to `your-app-name.herokuapp.com` and `HAS_SSL` to `True`.
+
 > **Note:** See the [Configuration](#configuration) section for required environment variables.
 
 ## Reverse Proxy Setup
@@ -365,17 +404,17 @@ This guide will help you set up a secure reverse proxy using **NGINX** for your 
 
 #### ✅ What You Need
 
--   A **VPS or server** running Ubuntu/Debian with NGINX installed.
--   Your **file streaming bot** running on a local port (e.g., `8080`).
--   A **subdomain** (e.g., `f2l.thunder.com`) set up in **Cloudflare**.
--   **Cloudflare Origin Certificate** files: `cert.pem` and `key.key`.
+- A **VPS or server** running Ubuntu/Debian with NGINX installed.
+- Your **file streaming bot** running on a local port (e.g., `8080`).
+- A **subdomain** (e.g., `f2l.thunder.com`) set up in **Cloudflare**.
+- **Cloudflare Origin Certificate** files: `cert.pem` and `key.key`.
 
 ---
 
 #### 🔐 Step 1: Configure Cloudflare
 
--   **DNS**: Add an `A` record for your subdomain pointing to your server's IP. Ensure **Proxy Status** is **Proxied (orange cloud)**.
--   **SSL**: In the **SSL/TLS** tab, set the encryption mode to **Full (strict)**.
+- **DNS**: Add an `A` record for your subdomain pointing to your server's IP. Ensure **Proxy Status** is **Proxied (orange cloud)**.
+- **SSL**: In the **SSL/TLS** tab, set the encryption mode to **Full (strict)**.
 
 ---
 
@@ -458,15 +497,17 @@ Your reverse proxy is now securely streaming files behind Cloudflare!
 
 **Q: Why isn't my bot responding after setup?**
 A: This is usually a configuration issue. Please check the following:
-1.  **Verify `config.env`**: Make sure all essential variables (`API_ID`, `API_HASH`, `BOT_TOKEN`, `BIN_CHANNEL`, `DATABASE_URL`) are filled in correctly.
-2.  **Use `config.env` Only**: Do not edit `vars.py` or `config_sample.env`. The bot is designed to only read your settings from `config.env`.
-3.  **Check Logs**: Review the console logs on your server or hosting platform (Koyeb, Render, Heroku) for any startup errors.
+
+1. **Verify `config.env`**: Make sure all essential variables (`API_ID`, `API_HASH`, `BOT_TOKEN`, `BIN_CHANNEL`, `DATABASE_URL`) are filled in correctly.
+2. **Use `config.env` Only**: Do not edit `vars.py` or `config_sample.env`. The bot is designed to only read your settings from `config.env`.
+3. **Check Logs**: Review the console logs on your server or hosting platform (Koyeb, Render, Heroku) for any startup errors.
 
 **Q: What do I use for the `FQDN` variable?**
 A: It's the public URL or IP address of your bot.
--   **With a Domain**: Use your subdomain (e.g., `f2l.thunder.com`).
--   **On Koyeb/Render/Heroku**: Use the public URL provided by the platform.
--   **On a VPS**: Use your server's public IP address.
+
+- **With a Domain**: Use your subdomain (e.g., `f2l.thunder.com`).
+- **On Koyeb/Render/Heroku**: Use the public URL provided by the platform.
+- **On a VPS**: Use your server's public IP address.
 
 **Q: Why are my links not working on a VPS?**
 A: For links to work on a VPS, the URL must include the port number (e.g., `http://YOUR_VPS_IP:8080`). Ensure that `NO_PORT` is set to `False` in `config.env` and that your server is configured to allow traffic through that port.
@@ -475,13 +516,15 @@ A: For links to work on a VPS, the URL must include the port number (e.g., `http
 
 **Q: Why are my links showing a "Resource Not Found" error or not working?**
 A: This error means the bot can't access the file. Check these three things:
-1.  **Invalid Token**: Your `BOT_TOKEN` or one of the `MULTI_TOKEN`s might be wrong. Double-check them with @BotFather.
-2.  **Missing Admin Rights**: The bot and **all** your client accounts must be **administrators** in the `BIN_CHANNEL`.
-3.  **File Deleted**: The link will break if the file was deleted from your `BIN_CHANNEL`.
+
+1. **Invalid Token**: Your `BOT_TOKEN` or one of the `MULTI_TOKEN`s might be wrong. Double-check them with @BotFather.
+2. **Missing Admin Rights**: The bot and **all** your client accounts must be **administrators** in the `BIN_CHANNEL`.
+3. **File Deleted**: The link will break if the file was deleted from your `BIN_CHANNEL`.
 
 **Q: Why isn't video or audio playing correctly in my browser?**
 A: Your browser likely doesn't support the file's audio or video format (codec). This is a browser limitation, not a bot issue.
--   **Solution**: For perfect playback, copy the link and play it in a dedicated media player. Recommended players include **VLC Media Player**, **MX Player**, **PotPlayer**, **IINA**, and **MPV**.
+
+- **Solution**: For perfect playback, copy the link and play it in a dedicated media player. Recommended players include **VLC Media Player**, **MX Player**, **PotPlayer**, **IINA**, and **MPV**.
 
 **Q: Why does the bot sometimes become unresponsive?**
 A: This is likely a **Telegram Flood Wait**. To prevent spam, Telegram temporarily limits accounts that make too many requests. The bot is designed to handle this automatically by pausing and will resume on its own once the limit is lifted.
@@ -490,15 +533,17 @@ A: This is likely a **Telegram Flood Wait**. To prevent spam, Telegram temporari
 
 **Q: How can I fix slow download and streaming speeds?**
 A: If your speeds are slow, here’s how to fix it:
--   **Add More Clients**: This is the best solution. Add `MULTI_TOKEN`s to your `config.env` to distribute the workload and increase throughput.
--   **Use DC4 Accounts**: For top performance, use Telegram accounts from **Data Center 4 (DC4)**, as they often have the fastest connection. Use `/dc` to check an account's data center.
--   **Upgrade Your Server**: A server with a slow network will bottleneck your speeds. Consider upgrading your VPS plan.
+
+- **Add More Clients**: This is the best solution. Add `MULTI_TOKEN`s to your `config.env` to distribute the workload and increase throughput.
+- **Use DC4 Accounts**: For top performance, use Telegram accounts from **Data Center 4 (DC4)**, as they often have the fastest connection. Use `/dc` to check an account's data center.
+- **Upgrade Your Server**: A server with a slow network will bottleneck your speeds. Consider upgrading your VPS plan.
 
 #### **Bot Usage**
 
 **Q: How do I generate links for multiple files at once?**
 A: The `/link` command can process multiple files sent in sequence. To use it, **reply to the first file** of the series with the command and the total count.
--   **Example**: For a series of 5 files, reply to the very first file with `/link 5`.
+
+- **Example**: For a series of 5 files, reply to the very first file with `/link 5`.
 
 **Q: Can I mix tokens from different accounts and data centers?**
 A: Yes. Mixing clients from different accounts and data centers (like DC1, DC4, and DC5) is a great way to improve bot performance and reliability.
@@ -507,11 +552,11 @@ A: Yes. Mixing clients from different accounts and data centers (like DC1, DC4, 
 
 Contributions are welcome! Please follow these steps:
 
-1.  Fork the repository.
-2.  Create a new feature branch (`git checkout -b feature/amazing-feature`).
-3.  Commit your changes (`git commit -m 'Add some amazing feature'`).
-4.  Push to the branch (`git push origin feature/amazing-feature`).
-5.  Open a Pull Request.
+1. Fork the repository.
+2. Create a new feature branch (`git checkout -b feature/amazing-feature`).
+3. Commit your changes (`git commit -m 'Add some amazing feature'`).
+4. Push to the branch (`git push origin feature/amazing-feature`).
+5. Open a Pull Request.
 
 ## License
 
@@ -519,10 +564,10 @@ Licensed under the [Apache License 2.0](LICENSE). See the `LICENSE` file for det
 
 ## Acknowledgments
 
--   [Pyrofork](https://github.com/Mayuri-Chan/pyrofork) - Telegram MTProto API Framework
--   [aiohttp](https://github.com/aio-libs/aiohttp) - Asynchronous HTTP Client/Server
--   [PyMongo](https://github.com/mongodb/mongo-python-driver) - Asynchronous MongoDB Driver
--   [TgCrypto](https://github.com/pyrogram/tgcrypto) - High-performance cryptography library
+- [Pyrofork](https://github.com/Mayuri-Chan/pyrofork) - Telegram MTProto API Framework
+- [aiohttp](https://github.com/aio-libs/aiohttp) - Asynchronous HTTP Client/Server
+- [PyMongo](https://github.com/mongodb/mongo-python-driver) - Asynchronous MongoDB Driver
+- [TgCrypto](https://github.com/pyrogram/tgcrypto) - High-performance cryptography library
 
 ## ⚠️ Disclaimer
 

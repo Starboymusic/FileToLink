@@ -88,7 +88,8 @@ MSG_DEAUTHORIZE_SUCCESS = (
 MSG_TOKEN_ACTIVATED = "✅ Token successfully activated!\n\n⏳ This token is valid for {duration_hours} hours."
 MSG_TOKEN_INVALID = "🚫 **Expired or Invalid Token.** Please click the button below to activate your access token."
 MSG_NO_AUTH_USERS = "ℹ️ **No Authorized Users Found:** The list is currently empty."
-MSG_AUTH_USER_INFO = """{i}. 👤 User ID: `{user_id}`
+MSG_AUTH_USER_INFO = """{i}. 👤: {display_name}
+   • User ID: `{user_id}`
    • Authorized by: `{authorized_by}`
    • Date: `{auth_time}`\n\n"""
 MSG_ADMIN_AUTH_LIST_HEADER = "🔐 **Authorized Users List**\n\n"
@@ -280,6 +281,13 @@ MSG_BROADCAST_COMPLETE = (
 )
 MSG_BROADCAST_CANCEL = "🛑 **Cancelling Broadcast:** `{broadcast_id}`\n\n> ⏳ Stopping operations..."
 MSG_INVALID_BROADCAST_CMD = "Please reply to the message you want to broadcast."
+MSG_BROADCAST_USAGE = (
+    "📣 **Broadcast Command Usage:**\n\n"
+    "`/broadcast` - Broadcast to all users\n"
+    "`/broadcast authorized` - Broadcast to authorized users only\n"
+    "`/broadcast regular` - Broadcast to regular (non-authorized) users only\n\n"
+    "**Note:** Reply to the message you want to broadcast."
+)
 
 # =====================================================================================
 # ====== PERMISSION MESSAGES ======
